@@ -2,17 +2,21 @@ async function fetchPhotographersJSON() {
     //retrieve the data from JSON file,
     //parse the JSON data using response.json()
     //extract the photographers array from the parsed data and return it.
-    const response = await fetch('./data/photographers.json');
-    const photographers = await response.json();
-    console.log(photographers); // return an array with photographers data in console.
-    return photographers;
+    try {
+        const response = await fetch('./data/photographers.json');
+        const photographers = await response.json();
+        console.log(photographers); // return an array with photographers data in console.
+        return photographers;
+    } catch(error) {
+        console.error(error);
+    }
 }
 
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
 
     photographers.forEach((photographer) => {
-        const photographerModel = photographerTemplate(photographer);
+        const photographerModel = new PhotographerTemplate(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
     });
