@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "eslint": "^8.42.0",
-    "http-server": "^14.1.1"
+    "eslint": "^8.42.0"
   }
 }
