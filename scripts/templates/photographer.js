@@ -1,40 +1,50 @@
-function photographerTemplate(data) {
-  const { name, portrait, city, country, tagline, price, id } = data;
+class PhotographerTemplate {
+    constructor(data) {
+        const { name, portrait, city, country, tagline, price, id } = data;
+        this.name = name;
+        this.portrait = portrait;
+        this.city = city;
+        this.country = country;
+        this.tagline = tagline;
+        this.price = price;
+        this.id = id;
+        this.picture = `assets/photographers/${this.portrait}`;
+    }
 
-  const picture = `assets/photographers/${portrait}`;
+    getUserCardDOM() {
+        const article = document.createElement("article");
 
-  function getUserCardDOM(data) {
-    const article = document.createElement("article");
+        const img = document.createElement("img");
+        img.setAttribute("src", this.picture);
+        img.addEventListener('click', this.redirectToPhotographerPage.bind(this));
 
-    const img = document.createElement("img"); //picture
-    img.setAttribute("src", picture);
+        const h2 = document.createElement("h2");
+        h2.textContent = this.name;
+        h2.addEventListener('click', this.redirectToPhotographerPage.bind(this));
 
-    const h2 = document.createElement("h2"); //name
-    h2.textContent = name;
+        const h3 = document.createElement("h3");
+        h3.textContent = this.city + ", " + this.country;
 
-    const h3 = document.createElement("h3"); //location
-    h3.textContent = city + ", " + country;
+        const p = document.createElement("p");
+        p.textContent = this.tagline;
 
-    const p = document.createElement("p"); //tagline
-    p.textContent = tagline;
+        const span = document.createElement("span");
+        span.textContent = this.price + "€/jour";
 
-    const span = document.createElement("span"); //price
-    span.textContent = price + "€/jour";
+        article.appendChild(img);
+        article.appendChild(h2);
+        article.appendChild(h3);
+        article.appendChild(p);
+        article.appendChild(span);
 
-    article.appendChild(img);
-    article.appendChild(h2);
-    article.appendChild(h3);
-    article.appendChild(p);
-    article.appendChild(span);
+        return article;
+    }
 
-    //add a function to redirect to ID page
+    redirectToPhotographerPage() {
+        const searchParams = new URLSearchParams();
+        searchParams.append('id', this.id);
+        const queryString = searchParams.toString();
+        window.location.href = `/photographer.html?${queryString}`;
+    }
 
-    return article;
-  }
-
-
-  
-  return { getUserCardDOM };
 }
-
-                            
