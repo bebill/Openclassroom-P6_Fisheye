@@ -1,11 +1,36 @@
-#contact_modal {
-    display: none;
-}
+/* BANNER SECTION */
 
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.photograph-header article {
+    display: flex;
+    flex-direction: column;
+}
+
+.photograph-header h1 {
+    color: #D3573C;
+    font-size: 4rem;
+    font-weight: 400;
+    max-width: 400px;
+    margin: 0;
+}
+
+.photograph-header h2 {
+    color: #901C1C;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.photograph-header p {
+    font-size: 1.25rem;
 }
 
 .contact_button {
@@ -19,6 +44,19 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.photograph-header img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+
+#contact_modal {
+    display: none;
 }
 
 .modal {
