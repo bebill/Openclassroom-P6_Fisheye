@@ -46,6 +46,16 @@
     cursor: pointer;
 }
 
+.contact_button:hover {
+    background-color: #DB8876;
+    color: black;
+}
+
+.contact_button:focus {
+    background-color: #DB8876;
+    color: black;
+}
+
 .photograph-header img {
     width: 200px;
     height: 200px;
@@ -55,8 +65,72 @@
 
 
 
+/* GALLERY */
+
+.photograph-gallery {
+    margin: 0 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+    justify-items: center;
+}
+
+.photograph-gallery img {
+    width: 350px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.photograph-gallery video {
+    width: 350px;
+    height: 300px;
+    object-fit: cover;
+}
+
+
+.photograph-gallery .like-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.photograph-gallery .media-caption {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+/* BOX */
+
+.photograph-sumbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 375px;
+    height: 89px;
+    background-color: #DB8876;
+    border-radius: 5px 5px 0 0;
+    position: sticky;
+    bottom: 0px;
+    left: 100%;
+}
+
+
+
+/* FORM MODAL */
+
 #contact_modal {
     display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(196, 196, 196, 0.4);
 }
 
 .modal {
@@ -98,6 +172,8 @@ form label {
     font-size: 36px;
 }
 
+
+
 form div {
     display: flex;
     flex-direction: column;
@@ -111,4 +187,55 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+
+.formData {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+
+.text-control {
+    margin: 0;
+    padding: 8px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 20px;
+    height: 48px;
+}
+
+/* Submit button */
+.btn-submit {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #DB8876;
+    color: black;
+}
+
+.btn-submit:focus {
+    background-color: #DB8876;
+    color: black;
+}
+
+
+/* Validity/Error */
+.formData.success .text-control {
+    border: 4px solid #FAFAFA;
+}
+
+
+.formData.error .text-control {
+    border: 4px solid #901C1C;
 }
