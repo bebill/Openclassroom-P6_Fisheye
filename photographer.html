@@ -16,24 +16,56 @@
     </a>
   </header>
   <main id="main">
-    <div class="photograph-header">
-
-    </div>
+    <div class="photograph-header"></div>
     <div class="photograph-gallery"></div>
+    <div class="photograph-sumbox"></div>
   </main>
   <div id="contact_modal">
     <div class="modal">
       <header>
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <img class="close" src="assets/icons/close.svg" onclick="closeModal()" />
       </header>
-      <form>
-        <div>
-          <label>Prénom</label>
-          <input />
+          <!-- FORM -->
+          <form id="contactRequest" name="contactRequest" action="index.html" method="get" novalidate>
+
+            <!-- FIRSTNAME -->
+            <div class="formData">
+              <label for="first">Prénom</label>
+              <br>
+              <input class="text-control" type="text" id="first" name="first" required>
+            </div>
+
+            <!-- LASTNAME -->
+            <div class="formData">
+              <label for="last">Nom</label>
+              <br>
+              <input class="text-control" type="text" id="last" name="last" required>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="formData">
+              <label for="email">E-mail</label>
+              <br>
+              <input class="text-control" type="email" id="email" name="email" required>
+            </div>
+
+
+            <!-- MESSAGE -->
+            <div class="formData">
+              <label for="email">Message</label>
+              <br>
+              <textarea class="text-control" type="text" id="message" name="message" required></textarea>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <input id="btn-submit" type="submit" class="btn-submit" value="Envoyer">
+
+          </form>
+
         </div>
-        <button class="contact_button">Envoyer</button>
-      </form>
+
+
     </div>
   </div>
   <script src="scripts/templates/photographerTemplate.js"></script>
