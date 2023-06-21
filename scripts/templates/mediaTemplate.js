@@ -67,8 +67,5 @@ class MediaTemplate {
 
     return box;
   }
-
-
-
 }
 
