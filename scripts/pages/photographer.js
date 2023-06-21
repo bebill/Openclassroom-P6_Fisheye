@@ -26,13 +26,43 @@ async function displayHeader() {
   headerContainer.appendChild(portraitArticle);
 }
 
+async function displayMedia() {
+  const dataGallery = await fetchPhotographerJSON();
+  const media = dataGallery.media.filter((m) => m.photographerId === parseInt(photographerId));
+
+  const mediaContainer = document.querySelector(".photograph-gallery");
+  console.log(media)
+  media.forEach((item) => {
+    const mediaTemplate = new MediaTemplate(item);
+    const mediaElement = mediaTemplate.createMediaContent();
+
+    mediaContainer.appendChild(mediaElement);
+
+
+  });
+}
+
+
+async function displayBox() {
+  const dataBox = await fetchPhotographerJSON();
+  const photographer = dataBox.photographers.find(p => p.id === parseInt(photographerId));
+  const boxTemplate = new MediaTemplate(photographer);
+
+  const sumBox = boxTemplate.createSumBox();
+
+  const boxContainer = document.querySelector(".photograph-sumbox");
+    boxContainer.appendChild(sumBox);
+  }
+
+
+
 
 
 async function init() {
   await displayHeader();
+  await displayMedia();
+  await displayBox();
 
-  // Perform additional initialization tasks here
-  // ...
 }
 
 init();
