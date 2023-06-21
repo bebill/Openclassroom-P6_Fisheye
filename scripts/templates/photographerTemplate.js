@@ -51,44 +51,44 @@ class PhotographerTemplate {
 
 
 
-  
+
   createInfoHeader() {
     const infoArticle = document.createElement("article");
-  
+
     const nameElement = document.createElement("h1");
     nameElement.textContent = this.name;
     infoArticle.appendChild(nameElement);
-  
+
     const locationElement = document.createElement("h2");
     locationElement.textContent = `${this.city}, ${this.country}`;
     infoArticle.appendChild(locationElement);
-  
+
     const taglineElement = document.createElement("p");
     taglineElement.textContent = this.tagline;
     infoArticle.appendChild(taglineElement);
-  
+
     return infoArticle;
   }
-  
+
   createButtonArticle() {
     const buttonArticle = document.createElement("article");
-  
+
     const contactButton = document.createElement('button');
     contactButton.classList.add('contact_button');
     contactButton.textContent = 'Contactez-moi';
     contactButton.addEventListener('click', displayModal);
     buttonArticle.appendChild(contactButton);
-  
+
     return buttonArticle;
   }
-  
+
   createPortraitArticle() {
     const portraitArticle = document.createElement("article");
-  
+
     const portraitImg = document.createElement("img");
     portraitImg.setAttribute("src", this.picture);
     portraitArticle.appendChild(portraitImg);
-  
+
     return portraitArticle;
   }
 }

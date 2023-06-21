@@ -46,7 +46,7 @@ form.addEventListener("submit", (e) => {
             message: message.value,
         };
 
-        console.log("User input:",formData);
+        console.log("User input:", formData);
         displayModalSubmit();
         form.reset();
         // window.location.href = "index.html"; 

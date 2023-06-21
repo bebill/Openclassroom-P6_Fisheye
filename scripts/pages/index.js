@@ -7,11 +7,12 @@ async function fetchPhotographersJSON() {
         const photographers = await response.json();
         console.log(photographers); // return an array with photographers data in console.
         return photographers;
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
 
+// display the photograhers id card
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
 

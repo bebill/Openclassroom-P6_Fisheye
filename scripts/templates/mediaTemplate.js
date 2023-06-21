@@ -1,3 +1,5 @@
+//mediaTemplate.js
+
 class MediaTemplate {
   constructor(data) {
     const { photographerId, id, title, likes, date, price, image, video, heart } = data;
@@ -55,18 +57,18 @@ class MediaTemplate {
 
     return mediaContent;
   }
-  
+
   createSumBox() {
     const box = document.createElement("div");
 
     const price = document.createElement("span");
-    price.textContent = this.price + "€ / jour" ;
+    price.textContent = this.price + "€ / jour";
     box.append(price);
 
     return box;
   }
 
-  
+
 
 }
 
