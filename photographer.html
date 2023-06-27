@@ -26,42 +26,46 @@
         <h2>Contactez-moi</h2>
         <img class="close" src="assets/icons/close.svg" onclick="closeModal()" />
       </header>
-          <!-- FORM -->
-          <form id="contactRequest" name="contactRequest" action="index.html" method="get" novalidate>
+<!-- FORM -->
+<form id="contactRequest" name="contactRequest" action="index.html" method="get" novalidate>
 
-            <!-- FIRSTNAME -->
-            <div class="formData">
-              <label for="first">Prénom</label>
-              <br>
-              <input class="text-control" type="text" id="first" name="first" required>
-            </div>
+  <!-- FIRSTNAME -->
+  <div class="formData">
+    <label for="first">Prénom</label>
+    <br>
+    <input class="text-control" type="text" id="first" name="first" required>
+    <div class="error-message"></div> <!-- Error message element -->
+  </div>
 
-            <!-- LASTNAME -->
-            <div class="formData">
-              <label for="last">Nom</label>
-              <br>
-              <input class="text-control" type="text" id="last" name="last" required>
-            </div>
+  <!-- LASTNAME -->
+  <div class="formData">
+    <label for="last">Nom</label>
+    <br>
+    <input class="text-control" type="text" id="last" name="last" required>
+    <div class="error-message"></div> <!-- Error message element -->
+  </div>
 
-            <!-- EMAIL -->
-            <div class="formData">
-              <label for="email">E-mail</label>
-              <br>
-              <input class="text-control" type="email" id="email" name="email" required>
-            </div>
+  <!-- EMAIL -->
+  <div class="formData">
+    <label for="email">E-mail</label>
+    <br>
+    <input class="text-control" type="email" id="email" name="email" required>
+    <div class="error-message"></div> <!-- Error message element -->
+  </div>
 
+  <!-- MESSAGE -->
+  <div class="formData">
+    <label for="email">Message</label>
+    <br>
+    <textarea class="text-control" type="text" id="message" name="message" required></textarea>
+    <div class="error-message"></div> <!-- Error message element -->
+  </div>
 
-            <!-- MESSAGE -->
-            <div class="formData">
-              <label for="email">Message</label>
-              <br>
-              <textarea class="text-control" type="text" id="message" name="message" required></textarea>
-            </div>
+  <!-- SUBMIT BUTTON -->
+  <input id="btn-submit" type="submit" class="btn-submit" value="Envoyer">
 
-            <!-- SUBMIT BUTTON -->
-            <input id="btn-submit" type="submit" class="btn-submit" value="Envoyer">
+</form>
 
-          </form>
 
         </div>
 

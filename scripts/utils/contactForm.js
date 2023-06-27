@@ -8,160 +8,103 @@ function closeModal() {
     modal.style.display = "none";
 }
 
-
-// close confirmation modal form after submit
-function displayModalSubmit() {
-    modal.style.display = 'none';
-}
-
 // DOM Elements
 const modal = document.getElementById("contact_modal");
-const form = document.querySelector("form");
 const formData = document.querySelectorAll(".formData");
-const firstName = document.querySelector("#first");
-const lastName = document.querySelector("#last");
-const email = document.querySelector("#email");
-const message = document.querySelector("#message");
-const submitForm = document.querySelector("#btn-submit");
+const form = document.getElementById("contactRequest");
+const firstName = document.getElementById("first");
+const lastName = document.getElementById("last");
+const email = document.getElementById("email");
+const message = document.getElementById("message");
+const submitForm = document.getElementById("btn-submit");
 
+// Regular expressions
+const nameRegex = /^[A-Za-zÀ-ÿ\s]+$/;
+const emailRegex = /^[a-zA-Z0-9.-_]+@[a-zA-Z0-9]+\.[a-z]+$/;
 
+// Function to display error message
+function displayErrorMessage(element, message) {
+    const errorElement = element.parentElement.querySelector(".error-message");
+    errorElement.textContent = message;
+    element.classList.add("error");
+}
 
+// Function to remove error message
+function removeErrorMessage(element) {
+    const errorElement = element.parentElement.querySelector(".error-message");
+    errorElement.textContent = "";
+    element.classList.remove("error");
+}
 
-// form validation
-form.addEventListener("submit", (e) => {
+// Submit button event listener
+submitForm.addEventListener("click", (e) => {
     e.preventDefault();
-    formErrors();
 
-    if (
-        validFirst === true &&
-        validLast === true &&
-        validMail === true &&
-        validMessage === true
-    ) {
-        // group data collected in the form in an object for the console.log
-        const formData = {
-            firstName: firstName.value,
-            lastName: lastName.value,
-            email: email.value,
-            message: message.value,
-        };
+    // Clear previous error messages
+    removeErrorMessage(firstName);
+    removeErrorMessage(lastName);
+    removeErrorMessage(email);
+    removeErrorMessage(message);
 
-        console.log("User input:", formData);
-        displayModalSubmit();
-        form.reset();
-        // window.location.href = "index.html"; 
-    }
-});
+    // Trim leading and trailing spaces from the fields
+    firstName.value = firstName.value.trim();
+    lastName.value = lastName.value.trim();
+    email.value = email.value.trim();
+    message.value = message.value.trim();
 
-// check errors
-function formErrors() {
+
+
+
+    // Validate form fields
     let isValid = true;
 
-    if (!firstNameVerify()) {
+    if (firstName.value === "") {
+        displayErrorMessage(firstName, "Please enter your first name");
+        isValid = false;
+    } else if (!nameRegex.test(firstName.value)) {
+        displayErrorMessage(firstName, "Please enter a valid first name");
         isValid = false;
     }
-    if (!lastNameVerify()) {
+
+    if (lastName.value === "") {
+        displayErrorMessage(lastName, "Please enter your last name");
+        isValid = false;
+    } else if (!nameRegex.test(lastName.value)) {
+        displayErrorMessage(lastName, "Please enter a valid last name");
         isValid = false;
     }
-    if (!emailVerify()) {
+
+    if (email.value === "") {
+        displayErrorMessage(email, "Please enter your email address");
+        isValid = false;
+    } else if (!emailRegex.test(email.value)) {
+        displayErrorMessage(email, "Please enter a valid email address");
         isValid = false;
     }
-    if (!messageVerify()) {
+
+    if (message.value === "") {
+        displayErrorMessage(message, "Please enter your message");
         isValid = false;
     }
-}
 
-
-
-
-// validation conditions : return to 'true' when ok
-let validFirst = false;
-let validLast = false;
-let validMail = false;
-let validMessage = false;
-
-
-
-// error settings
-function setError(elem) {
-    const formData = elem.parentElement;
-    //change class to error
-    formData.className = "formData error";
-}
-
-// success settings
-function setSuccess(elem) {
-    const formData = elem.parentElement;
-    //change class to success
-    formData.className = "formData success";
-}
-
-
-
-//last name verify
-function firstNameVerify() {
-    const firstNameValue = firstName.value.trim();
-    if (firstNameValue === "") {
-        setError(firstName);
-    } else if (!firstNameValue.match(/^[a-zA-Z-àáâãäåçèéêëìíîïðòóôõöùúûüýÿ\s]+$/)) {
-        setError(firstName);
-    } else if (firstNameValue.length < 1) {
-        setError(firstName);
-    } else {
-        setSuccess(firstName);
-        return validFirst = true;
+    if (!isValid) {
+        return;
     }
-}
 
+    // Retrieve form values
+    const formData = {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        message: message.value,
+    };
 
-//last name verify
-function lastNameVerify() {
-    const lastNameValue = lastName.value.trim();
-    if (lastNameValue === "") {
-        setError(lastName);
-    } else if (!lastNameValue.match(/^[a-zA-Z-àáâãäåçèéêëìíîïðòóôõöùúûüýÿ\s]+$/)) {
-        setError(lastName);
-    } else if (lastNameValue.length < 1) {
-        setError(lastName);
-    } else {
-        setSuccess(lastName);
-        return validLast = true;
-    }
-}
+    // Perform desired actions with the form data
+    console.log("Form data:", formData);
 
+    // Reset the form
+    form.reset();
 
-// email verify
-function emailVerify() {
-    const emailValue = email.value.trim();
-    if (emailValue === "") {
-        setError(email);
-    } else if (!emailRegex(emailValue)) {
-        setError(email);
-    } else {
-        setSuccess(email);
-        return validMail = true;
-    }
-}
-
-function emailRegex(email) {
-    /*  Adresse mail valide : xyz.abc@example.com
-        Format : "lettres/chiffres._-"  + "@" + "lettres/chiffres" + "." + "lettres"   */
-    return (
-        /^[a-z0-9.-_]+@[a-z0-9]+\.[a-z]+$/.test(email)
-    );
-}
-
-//message verify
-function messageVerify() {
-    const messageValue = message.value.trim();
-    if (messageValue === "") {
-        setError(message);
-    } else if (messageValue.length < 1) {
-        setError(message);
-    } else {
-        setSuccess(message);
-        return validMessage = true;
-    }
-}
-
-
+    // Close the modal
+    closeModal();
+});
