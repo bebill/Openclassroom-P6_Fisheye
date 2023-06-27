@@ -42,9 +42,9 @@ class MediaTemplate {
     const like = document.createElement("div");
     like.classList.add("like")
 
-    const NbLikes = document.createElement("span");
-    NbLikes.textContent = this.likes;
-    like.appendChild(NbLikes);
+    const nbLikes = document.createElement("span");
+    nbLikes.textContent = this.likes;
+    like.appendChild(nbLikes);
 
     const heart = document.createElement("img");
     heart.classList.add("like-icon");
@@ -68,4 +68,3 @@ class MediaTemplate {
     return box;
   }
 }
-
