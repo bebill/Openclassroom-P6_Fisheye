@@ -10,26 +10,25 @@ function closeModal() {
 
 // DOM Elements
 const modal = document.getElementById("contact_modal");
-const formData = document.querySelectorAll(".formData");
-const form = document.getElementById("contactRequest");
-const firstName = document.getElementById("first");
-const lastName = document.getElementById("last");
-const email = document.getElementById("email");
-const message = document.getElementById("message");
+const formData = document.querySelectorAll(".formData"); 
+const formDOM = document.getElementById("contactRequest");
+const firstNameDOM = document.getElementById("first");
+const lastNameDOM = document.getElementById("last");
+const emailDOM = document.getElementById("email");
+const messageDOM = document.getElementById("message");
 const submitForm = document.getElementById("btn-submit");
 
 // Regular expressions
 const nameRegex = /^[A-Za-zÀ-ÿ\s]+$/;
 const emailRegex = /^[a-zA-Z0-9.-_]+@[a-zA-Z0-9]+\.[a-z]+$/;
 
-// Function to display error message
+
 function displayErrorMessage(element, message) {
     const errorElement = element.parentElement.querySelector(".error-message");
     errorElement.textContent = message;
     element.classList.add("error");
 }
 
-// Function to remove error message
 function removeErrorMessage(element) {
     const errorElement = element.parentElement.querySelector(".error-message");
     errorElement.textContent = "";
@@ -41,49 +40,45 @@ submitForm.addEventListener("click", (e) => {
     e.preventDefault();
 
     // Clear previous error messages
-    removeErrorMessage(firstName);
-    removeErrorMessage(lastName);
-    removeErrorMessage(email);
-    removeErrorMessage(message);
+    [firstNameDOM, lastNameDOM, emailDOM, messageDOM].forEach(input => removeErrorMessage(input))
 
-    // Trim leading and trailing spaces from the fields
-    firstName.value = firstName.value.trim();
-    lastName.value = lastName.value.trim();
-    email.value = email.value.trim();
-    message.value = message.value.trim();
+    firstNameDOM.value = firstNameDOM.value.trim();
+    lastNameDOM.value = lastNameDOM.value.trim();
+    emailDOM.value = emailDOM.value.trim();
+    messageDOM.value = messageDOM.value.trim();
 
 
 
 
-    // Validate form fields
+    // Validate formDOM fields
     let isValid = true;
 
-    if (firstName.value === "") {
-        displayErrorMessage(firstName, "Please enter your first name");
+    if (firstNameDOM.value === "") {
+        displayErrorMessage(firstNameDOM, "Veuillez entrer votre Prénom");
         isValid = false;
-    } else if (!nameRegex.test(firstName.value)) {
-        displayErrorMessage(firstName, "Please enter a valid first name");
-        isValid = false;
-    }
-
-    if (lastName.value === "") {
-        displayErrorMessage(lastName, "Please enter your last name");
-        isValid = false;
-    } else if (!nameRegex.test(lastName.value)) {
-        displayErrorMessage(lastName, "Please enter a valid last name");
+    } else if (!nameRegex.test(firstNameDOM.value)) {
+        displayErrorMessage(firstNameDOM, "Ce champ ne peut contenir que des lettres");
         isValid = false;
     }
 
-    if (email.value === "") {
-        displayErrorMessage(email, "Please enter your email address");
+    if (lastNameDOM.value === "") {
+        displayErrorMessage(lastNameDOM, "Veuillez entrer votre Nom");
         isValid = false;
-    } else if (!emailRegex.test(email.value)) {
-        displayErrorMessage(email, "Please enter a valid email address");
+    } else if (!nameRegex.test(lastNameDOM.value)) {
+        displayErrorMessage(lastNameDOM, "Ce champ ne peut contenir que des lettres");
         isValid = false;
     }
 
-    if (message.value === "") {
-        displayErrorMessage(message, "Please enter your message");
+    if (emailDOM.value === "") {
+        displayErrorMessage(emailDOM, "Veuillez entrer votre Courriel");
+        isValid = false;
+    } else if (!emailRegex.test(emailDOM.value)) {
+        displayErrorMessage(emailDOM, "Veuillez entrez un format de courriel valide (ex: xyz@example.com)");
+        isValid = false;
+    }
+
+    if (messageDOM.value === "") {
+        displayErrorMessage(messageDOM, "Veuillez entrer votre Message");
         isValid = false;
     }
 
@@ -91,20 +86,15 @@ submitForm.addEventListener("click", (e) => {
         return;
     }
 
-    // Retrieve form values
+    // Retrieve formDOM values
     const formData = {
-        firstName: firstName.value,
-        lastName: lastName.value,
-        email: email.value,
-        message: message.value,
+        firstName: firstNameDOM.value,
+        lastName: lastNameDOM.value,
+        email: emailDOM.value,
+        message: messageDOM.value,
     };
 
-    // Perform desired actions with the form data
-    console.log("Form data:", formData);
-
-    // Reset the form
-    form.reset();
-
-    // Close the modal
+    console.log("User input:", formData);
+    formDOM.reset();
     closeModal();
 });
