@@ -50,7 +50,7 @@ submitForm.addEventListener("click", (e) => {
 
 
 
-    // Validate formDOM fields
+    // Validate form fields
     let isValid = true;
 
     if (firstNameDOM.value === "") {
@@ -86,7 +86,7 @@ submitForm.addEventListener("click", (e) => {
         return;
     }
 
-    // Retrieve formDOM values
+    // Retrieve form values
     const formData = {
         firstName: firstNameDOM.value,
         lastName: lastNameDOM.value,
