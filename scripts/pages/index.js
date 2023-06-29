@@ -25,8 +25,12 @@ async function displayData(photographers) {
 
 async function init() {
     //starts the process of loading the photographers' data and displaying it in the application
+    try {
     const { photographers } = await fetchPhotographersJSON();
     displayData(photographers);
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 init();

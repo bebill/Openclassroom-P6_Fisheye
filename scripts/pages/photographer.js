@@ -3,6 +3,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const photographerId = urlParams.get('id');
 
+
 // fetch data from json
 async function fetchPhotographerJSON() {
   try {
@@ -19,6 +20,11 @@ async function displayHeader() {
   const dataHeader = await fetchPhotographerJSON();
   // Find the photographer object that matches the specified photographerId
   const photographer = dataHeader.photographers.find(p => p.id === parseInt(photographerId));
+
+  if (!photographer) {
+    console.error("Photographer not found");
+    return;
+  }
 
   const photographerTemplate = new PhotographerTemplate(photographer);
   const infoArticle = photographerTemplate.createInfoHeader();
@@ -37,15 +43,23 @@ async function displayMedia() {
   // Filter the media items based on the photographerId
   const media = dataGallery.media.filter((m) => m.photographerId === parseInt(photographerId));
 
+  if (!media) {
+    console.error("Media not found");
+    return;
+  }
+
   const mediaContainer = document.querySelector(".photograph-gallery");
   console.log(media)
   media.forEach((item) => {
     const mediaTemplate = new MediaTemplate(item);
     const mediaElement = mediaTemplate.createMediaContent();
 
+    // Add click event listener to each media element and display the lightbox
+    mediaElement.addEventListener("click", () => {
+      displayLightbox(item);
+    });
+
     mediaContainer.appendChild(mediaElement);
-
-
   });
 }
 
@@ -53,6 +67,11 @@ async function displayMedia() {
 async function displayBox() {
   const dataBox = await fetchPhotographerJSON();
   const photographer = dataBox.photographers.find(p => p.id === parseInt(photographerId));
+
+  if (!photographer) {
+    console.error("Photographer not found");
+    return;
+  }
 
   const boxTemplate = new MediaTemplate(photographer);
 
@@ -67,10 +86,24 @@ async function displayBox() {
 
 
 async function init() {
-  await displayHeader();
-  await displayMedia();
-  await displayBox();
+  try {
+    await displayHeader();
+  } catch (error) {
+    console.error('Error occurred while displaying header:', error);
+  }
 
+  try {
+    await displayMedia();
+  } catch (error) {
+    console.error('Error occurred while displaying media:', error);
+  }
+
+  try {
+    await displayBox();
+  } catch (error) {
+    console.error('Error occurred while displaying box:', error);
+  }
 }
 
 init();
+
