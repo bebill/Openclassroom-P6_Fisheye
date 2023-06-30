@@ -54,10 +54,18 @@ async function displayMedia() {
     const mediaTemplate = new MediaTemplate(item);
     const mediaElement = mediaTemplate.createMediaContent();
 
-    // Add click event listener to each media element and display the lightbox
-    mediaElement.addEventListener("click", () => {
-      displayLightbox(item);
-    });
+    // display the lightbox
+    if (item.image) {
+      const img = mediaElement.querySelector("img");
+      img.addEventListener("click", () => {
+        displayLightbox(item);
+      });
+    } else if (item.video) {
+      const video = mediaElement.querySelector("video");
+      video.addEventListener("click", () => {
+        displayLightbox(item);
+      });
+    }
 
     mediaContainer.appendChild(mediaElement);
   });
@@ -67,18 +75,25 @@ async function displayMedia() {
 async function displayBox() {
   const dataBox = await fetchPhotographerJSON();
   const photographer = dataBox.photographers.find(p => p.id === parseInt(photographerId));
+  const photographerMedia = dataBox.media.filter((m) => m.photographerId === parseInt(photographerId));
 
-  if (!photographer) {
-    console.error("Photographer not found");
+  if (!photographer || !photographerMedia) {
+    if (!photographer) {
+      console.error("Photographer not found");
+    }
+    if (!photographerMedia) {
+      console.error("Media not found");
+    }
     return;
   }
 
-  const boxTemplate = new MediaTemplate(photographer);
-
-  const sumBox = boxTemplate.createSumBox();
+  const boxTemplate = new PhotographerTemplate(photographer);
+  const priceRecap = boxTemplate.createPriceRecap();
+  const likesRecap = boxTemplate.createLikesRecap(photographerMedia);
 
   const boxContainer = document.querySelector(".photograph-sumbox");
-  boxContainer.appendChild(sumBox);
+  boxContainer.appendChild(priceRecap);
+  boxContainer.appendChild(likesRecap);
 }
 
 
