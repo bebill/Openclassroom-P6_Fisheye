@@ -89,10 +89,11 @@
 }
 
 
-.photograph-gallery .like-icon {
+.photograph-gallery i {
     width: 20px;
     height: 20px;
     object-fit: contain;
+    color: #901C1C;
 }
 
 .photograph-gallery .media-caption {
