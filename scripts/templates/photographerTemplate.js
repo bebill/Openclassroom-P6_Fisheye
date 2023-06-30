@@ -50,8 +50,6 @@ class PhotographerTemplate {
   }
 
 
-
-
   createInfoHeader() {
     const infoArticle = document.createElement("article");
 
@@ -91,4 +89,27 @@ class PhotographerTemplate {
 
     return portraitArticle;
   }
+
+  createPriceRecap() {
+    const price = document.createElement("span");
+    price.textContent = this.price + "€ / jour";
+
+    return price;
+  }
+
+  createLikesRecap(photographerMedia) {
+    const totalLikes = photographerMedia.reduce((sum, item) => sum + item.likes, 0);
+
+    const totalLikesDisplay = document.createElement("span");
+    totalLikesDisplay.textContent = totalLikes;
+
+    const heart = document.createElement("i");
+    heart.classList.add("fa-solid", "fa-heart");
+    totalLikesDisplay.appendChild(heart);
+
+    return totalLikesDisplay;
+  }
 }
+
+
+

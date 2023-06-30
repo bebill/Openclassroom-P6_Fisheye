@@ -2,16 +2,16 @@
 
 class MediaTemplate {
   constructor(data) {
-    const { photographerId, id, title, likes, date, price, image, video, heart } = data;
+    const { photographerId, id, title, likes, date, price, image, video } = data;
     this.id = id;
     this.photographerId = photographerId;
     this.title = title;
     this.likes = likes;
+    this.originalLikes = this.likes;
     this.date = date;
     this.price = price;
     this.image = image ? `./assets/media/${data.photographerId}/${image}` : null;
     this.video = video ? `./assets/media/${data.photographerId}/${video}` : null;
-    this.heart = `./assets/icons/heart.svg`;
 
   }
 
@@ -46,10 +46,23 @@ class MediaTemplate {
     nbLikes.textContent = this.likes;
     like.appendChild(nbLikes);
 
-    const heart = document.createElement("img");
-    heart.classList.add("like-icon");
-    heart.setAttribute("src", this.heart);
+    const heart = document.createElement("i");
+    heart.setAttribute("class", "fa-regular fa-heart");
     like.appendChild(heart);
+
+    heart.addEventListener("click", () => {
+      if (this.likes === this.originalLikes) {
+        // Increase the likes count
+        this.likes += 1;
+        nbLikes.textContent = this.likes;
+        heart.setAttribute("class", "fa-solid fa-heart");
+      } else {
+        // Reset the likes count
+        this.likes = this.originalLikes;
+        nbLikes.textContent = this.likes;
+        heart.setAttribute("class", "fa-regular fa-heart");
+      }
+    });
 
     mediaCaption.appendChild(like);
 
@@ -58,13 +71,4 @@ class MediaTemplate {
     return mediaContent;
   }
 
-  createSumBox() {
-    const box = document.createElement("div");
-
-    const price = document.createElement("span");
-    price.textContent = this.price + "€ / jour";
-    box.append(price);
-
-    return box;
-  }
 }
