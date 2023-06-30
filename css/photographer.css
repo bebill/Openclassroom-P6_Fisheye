@@ -68,10 +68,8 @@
 /* GALLERY */
 
 .photograph-gallery {
-    margin: 0 100px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
     align-items: center;
     justify-items: center;
 }
