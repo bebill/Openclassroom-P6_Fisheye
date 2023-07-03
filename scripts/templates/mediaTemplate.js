@@ -12,7 +12,6 @@ class MediaTemplate {
     this.price = price;
     this.image = image ? `./assets/media/${data.photographerId}/${image}` : null;
     this.video = video ? `./assets/media/${data.photographerId}/${video}` : null;
-
   }
 
 
@@ -47,7 +46,7 @@ class MediaTemplate {
     like.appendChild(nbLikes);
 
     const heart = document.createElement("i");
-    heart.setAttribute("class", "fa-regular fa-heart");
+    heart.setAttribute("class", "heart-media fa-regular fa-heart");
     like.appendChild(heart);
 
     heart.addEventListener("click", () => {
@@ -55,20 +54,19 @@ class MediaTemplate {
         // Increase the likes count
         this.likes += 1;
         nbLikes.textContent = this.likes;
-        heart.setAttribute("class", "fa-solid fa-heart");
+        heart.setAttribute("class", "heart-media fa-solid fa-heart");
       } else {
         // Reset the likes count
         this.likes = this.originalLikes;
         nbLikes.textContent = this.likes;
-        heart.setAttribute("class", "fa-regular fa-heart");
+        heart.setAttribute("class", "heart-media fa-regular fa-heart");
       }
+
     });
 
     mediaCaption.appendChild(like);
-
     mediaContent.appendChild(mediaCaption);
 
     return mediaContent;
   }
-
 }
