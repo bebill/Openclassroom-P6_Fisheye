@@ -1,6 +1,7 @@
 //photographerTemplate.js
+import { displayModal, closeModal } from "../utils/contactForm.js";
 
-class PhotographerTemplate {
+export default class PhotographerTemplate {
   constructor(data) {
     const { name, portrait, city, country, tagline, price, id } = data;
     this.name = name;
@@ -15,14 +16,18 @@ class PhotographerTemplate {
 
   getUserCardDOM() {
     const article = document.createElement("article");
+    const figure = document.createElement("figure");
+    const figcaption = document.createElement("figcaption");
+    const a = document.createElement("a");
+    a.setAttribute("tabindex", "0");
+    a.setAttribute('href', `./photographer.html?id=${this.id}`);
 
     const img = document.createElement("img");
     img.setAttribute("src", this.picture);
-    img.addEventListener('click', this.redirectToPhotographerPage.bind(this));
 
     const h2 = document.createElement("h2");
     h2.textContent = this.name;
-    h2.addEventListener('click', this.redirectToPhotographerPage.bind(this));
+    h2.setAttribute("aria-label", this.name)
 
     const h3 = document.createElement("h3");
     h3.textContent = this.city + ", " + this.country;
@@ -33,20 +38,16 @@ class PhotographerTemplate {
     const span = document.createElement("span");
     span.textContent = this.price + "€/jour";
 
-    article.appendChild(img);
-    article.appendChild(h2);
-    article.appendChild(h3);
-    article.appendChild(p);
-    article.appendChild(span);
+    a.appendChild(img);
+    a.appendChild(h2);
+    figure.appendChild(a);
+    figcaption.appendChild(h3);
+    figcaption.appendChild(p);
+    figcaption.appendChild(span);
+    article.appendChild(figure);
+    article.appendChild(figcaption);
 
     return article;
-  }
-
-  redirectToPhotographerPage() {
-    const searchParams = new URLSearchParams();
-    searchParams.append('id', this.id);
-    const queryString = searchParams.toString();
-    window.location.href = `/photographer.html?${queryString}`;
   }
 
 
@@ -72,9 +73,14 @@ class PhotographerTemplate {
     const buttonArticle = document.createElement("article");
 
     const contactButton = document.createElement('button');
-    contactButton.classList.add('contact_button');
+    contactButton.classList.add('contact-button');
     contactButton.textContent = 'Contactez-moi';
+    contactButton.setAttribute("aria-label", "Contact Me")
     contactButton.addEventListener('click', displayModal);
+    const closeModalButton = document.getElementById("close-btn");
+    closeModalButton.addEventListener('click', closeModal);
+    closeModalButton.setAttribute("tabindex", "0");
+    closeModalButton.setAttribute("aria-label", "Close Contact Form");
     buttonArticle.appendChild(contactButton);
 
     return buttonArticle;
@@ -85,6 +91,7 @@ class PhotographerTemplate {
 
     const portraitImg = document.createElement("img");
     portraitImg.setAttribute("src", this.picture);
+    portraitImg.setAttribute("alt", this.name);
     portraitArticle.appendChild(portraitImg);
 
     return portraitArticle;
@@ -102,28 +109,27 @@ class PhotographerTemplate {
     const heartMediaList = document.getElementsByClassName("heart-media");
 
     const totalLikesDisplay = document.createElement("span");
-    totalLikesDisplay.textContent = totalLikes;
+    totalLikesDisplay.textContent = totalLikes + " ";
 
     const heartBox = document.createElement("i");
     heartBox.classList.add("fa-solid", "fa-heart");
     totalLikesDisplay.appendChild(heartBox);
 
-
     for (let i = 0; i < heartMediaList.length; i++) {
       const heartMedia = heartMediaList[i];
       heartMedia.addEventListener("click", (event) => {
-        if (event.target.classList.contains("fa-solid")) {
-          totalLikes += 1;
-          totalLikesDisplay.textContent = totalLikes;
-          totalLikesDisplay.appendChild(heartBox);
-        } else if (event.target.classList.contains("fa-regular")) {
-          totalLikes -= 1;
-          totalLikesDisplay.textContent = totalLikes;
-          totalLikesDisplay.appendChild(heartBox);
-        }
+        event.target.classList.contains("fa-solid") ? totalLikes += 1 : totalLikes -= 1;
+        totalLikesDisplay.textContent = totalLikes + " ";
+        totalLikesDisplay.appendChild(heartBox);
       });
+      heartMedia.addEventListener("keydown", (event) => {
+        if (event.key === "Enter"){
+        event.target.classList.contains("fa-solid") ? totalLikes += 1 : totalLikes -= 1;
+        totalLikesDisplay.textContent = totalLikes + " ";
+        totalLikesDisplay.appendChild(heartBox);
+      }});
     }
-    
+
     return totalLikesDisplay;
   }
 }
