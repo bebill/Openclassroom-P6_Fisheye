@@ -1,6 +1,5 @@
 //mediaTemplate.js
-
-class MediaTemplate {
+export default class MediaTemplate {
   constructor(data) {
     const { photographerId, id, title, likes, date, price, image, video } = data;
     this.id = id;
@@ -17,18 +16,23 @@ class MediaTemplate {
 
   createMediaContent() {
     const mediaContent = document.createElement("figure");
+    const mediaLink = document.createElement("a");
 
     if (this.image) {
       const img = document.createElement("img");
       img.setAttribute("src", this.image);
+      img.setAttribute("alt", this.title + ", closeup view");
+      img.setAttribute("tabindex", "0");
 
-      mediaContent.appendChild(img);
+      mediaLink.appendChild(img);
     } else if (this.video) {
       const video = document.createElement("video");
       video.setAttribute("src", this.video);
+      video.setAttribute("alt", this.title + ", closeup view");
+      video.setAttribute("tabindex", "0");
       video.setAttribute("controls", true);
-
-      mediaContent.appendChild(video);
+      video.setAttribute("type", "video/mp4");
+      mediaLink.appendChild(video);
     }
 
     const mediaCaption = document.createElement("figcaption");
@@ -40,30 +44,55 @@ class MediaTemplate {
 
     const like = document.createElement("div");
     like.classList.add("like")
+    like.setAttribute("aria-label", "likes")
 
     const nbLikes = document.createElement("span");
-    nbLikes.textContent = this.likes;
+    nbLikes.textContent = this.likes + " ";
     like.appendChild(nbLikes);
 
     const heart = document.createElement("i");
     heart.setAttribute("class", "heart-media fa-regular fa-heart");
+    heart.setAttribute("tabindex", "0")
     like.appendChild(heart);
 
     heart.addEventListener("click", () => {
+      let classToAdd = '';
+
       if (this.likes === this.originalLikes) {
         // Increase the likes count
-        this.likes += 1;
-        nbLikes.textContent = this.likes;
-        heart.setAttribute("class", "heart-media fa-solid fa-heart");
+        this.likes++;
+        classToAdd = "fa-solid";
       } else {
         // Reset the likes count
         this.likes = this.originalLikes;
-        nbLikes.textContent = this.likes;
-        heart.setAttribute("class", "heart-media fa-regular fa-heart");
+        classToAdd = "fa-regular";
       }
+
+      nbLikes.textContent = this.likes + " ";
+      heart.setAttribute("class", `heart-media ${classToAdd} fa-heart`);
 
     });
 
+    heart.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        let classToAdd = '';
+    
+        if (this.likes === this.originalLikes) {
+          // Increase the likes count
+          this.likes++;
+          classToAdd = "fa-solid";
+        } else {
+          // Reset the likes count
+          this.likes = this.originalLikes;
+          classToAdd = "fa-regular";
+        }
+    
+        nbLikes.textContent = this.likes + " ";
+        heart.setAttribute("class", `heart-media ${classToAdd} fa-heart`);
+      }
+    });
+
+    mediaContent.appendChild(mediaLink);
     mediaCaption.appendChild(like);
     mediaContent.appendChild(mediaCaption);
 
