@@ -1,3 +1,5 @@
+import PhotographerTemplate from "../templates/photographerTemplate.js";
+
 async function fetchPhotographersJSON() {
     //retrieve the data from JSON file,
     //parse the JSON data using response.json()
@@ -14,12 +16,13 @@ async function fetchPhotographersJSON() {
 
 // display the photograhers id card
 async function displayData(photographers) {
-    const photographersSection = document.querySelector(".photographer_section");
+    const photographersSection = document.getElementsByClassName("photographer-section");
+    const photographersSectionArray = [...photographersSection];
 
     photographers.forEach((photographer) => {
         const photographerModel = new PhotographerTemplate(photographer)
         const userCardDOM = photographerModel.getUserCardDOM();
-        photographersSection.appendChild(userCardDOM);
+        photographersSectionArray[0].appendChild(userCardDOM);
     });
 }
 
