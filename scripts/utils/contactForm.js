@@ -7,6 +7,19 @@ export function displayModal() {
   otherElements.forEach((element) => {
     element.setAttribute("inert", "");
   });
+
+  modal.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        closeModal();
+    }
+  });
+  
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+        closeModal();
+    }
+  });
 }
 
 export function closeModal() {
@@ -118,4 +131,5 @@ export function addSubmitFormListener() {
     closeModal();
   });
 }
+
 

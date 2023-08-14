@@ -77,10 +77,16 @@ export default class PhotographerTemplate {
     contactButton.textContent = 'Contactez-moi';
     contactButton.setAttribute("aria-label", "Contact Me")
     contactButton.addEventListener('click', displayModal);
+    
     const closeModalButton = document.getElementById("close-btn");
-    closeModalButton.addEventListener('click', closeModal);
     closeModalButton.setAttribute("tabindex", "0");
     closeModalButton.setAttribute("aria-label", "Close Contact Form");
+    closeModalButton.addEventListener('click', closeModal);
+    closeModalButton.addEventListener('keydown', (event) => {
+      if (event.key === "Enter") {
+        closeModal();
+      }
+    });
     buttonArticle.appendChild(contactButton);
 
     return buttonArticle;
