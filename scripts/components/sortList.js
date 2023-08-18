@@ -13,7 +13,6 @@ function closeDropdown() {
     dropdownOptionsContainer.classList.remove("show");
 }
 
-
 customDropdown.addEventListener("click", () => {
     displayDropdown();
 });
