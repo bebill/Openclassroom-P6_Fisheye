@@ -55,6 +55,7 @@ export default function handleOptionSelection(option, mediaContainer, media, pho
     displayUpdatedMediaGallery(mediaContainer, media, photographerId);
 }
 
+// keyboard navigation setup
 let currentOptionIndex = 0;
 export function navigateOption(direction) {
     const newOptionIndex = currentOptionIndex + direction;
