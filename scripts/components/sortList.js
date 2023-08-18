@@ -1,6 +1,5 @@
 import displayUpdatedMediaGallery from "./updatedGallery.js";
 
-
 const customDropdown = document.getElementsByClassName("custom-dropdown")[0];
 const dropdownOptionsContainer = document.getElementsByClassName("dropdown-options")[0];
 const dropdownOptions = document.querySelectorAll(".dropdown-option");
