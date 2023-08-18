@@ -1,5 +1,5 @@
 //photographerTemplate.js
-import { displayModal, closeModal } from "../utils/contactForm.js";
+import { displayModal, closeModal } from "../components/contactForm.js";
 
 export default class PhotographerTemplate {
   constructor(data) {
