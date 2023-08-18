@@ -10,14 +10,14 @@ export function displayModal() {
 
   modal.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-        closeModal();
+      closeModal();
     }
   });
-  
+
 
   modal.addEventListener("click", (event) => {
     if (event.target === modal) {
-        closeModal();
+      closeModal();
     }
   });
 }
@@ -31,9 +31,6 @@ export function closeModal() {
   });
 }
 
-
-
-// Regular expressions
 const nameRegex = /^[A-Za-zÀ-ÿ\s]+$/;
 const emailRegex = /^[a-zA-Z0-9.-_]+@[a-zA-Z0-9]+\.[a-z]+$/;
 
@@ -131,5 +128,3 @@ export function addSubmitFormListener() {
     closeModal();
   });
 }
-
-

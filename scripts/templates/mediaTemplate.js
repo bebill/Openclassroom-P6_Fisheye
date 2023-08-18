@@ -1,4 +1,3 @@
-//mediaTemplate.js
 export default class MediaTemplate {
   constructor(data) {
     const { photographerId, id, title, likes, date, price, image, video } = data;
@@ -76,17 +75,15 @@ export default class MediaTemplate {
     heart.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         let classToAdd = '';
-    
+
         if (this.likes === this.originalLikes) {
-          // Increase the likes count
           this.likes++;
           classToAdd = "fa-solid";
         } else {
-          // Reset the likes count
           this.likes = this.originalLikes;
           classToAdd = "fa-regular";
         }
-    
+
         nbLikes.textContent = this.likes + " ";
         heart.setAttribute("class", `heart-media ${classToAdd} fa-heart`);
       }

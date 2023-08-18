@@ -65,7 +65,6 @@ export default function displayLightbox(media, photographerId) {
         navigateMedia(1);
     });
 
-
     document.addEventListener("keydown", (event) => {
         if (event.key === "ArrowLeft") {
             navigateMedia(-1);

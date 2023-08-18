@@ -76,7 +76,7 @@ export default class PhotographerTemplate {
     contactButton.textContent = 'Contactez-moi';
     contactButton.setAttribute("aria-label", "Contact Me")
     contactButton.addEventListener('click', displayModal);
-    
+
     const closeModalButton = document.getElementById("close-btn");
     closeModalButton.setAttribute("tabindex", "0");
     closeModalButton.setAttribute("aria-label", "Close Contact Form");
@@ -128,11 +128,12 @@ export default class PhotographerTemplate {
         totalLikesDisplay.appendChild(heartBox);
       });
       heartMedia.addEventListener("keydown", (event) => {
-        if (event.key === "Enter"){
-        event.target.classList.contains("fa-solid") ? totalLikes += 1 : totalLikes -= 1;
-        totalLikesDisplay.textContent = totalLikes + " ";
-        totalLikesDisplay.appendChild(heartBox);
-      }});
+        if (event.key === "Enter") {
+          event.target.classList.contains("fa-solid") ? totalLikes += 1 : totalLikes -= 1;
+          totalLikesDisplay.textContent = totalLikes + " ";
+          totalLikesDisplay.appendChild(heartBox);
+        }
+      });
     }
 
     return totalLikesDisplay;
