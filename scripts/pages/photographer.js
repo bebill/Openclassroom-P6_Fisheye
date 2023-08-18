@@ -1,7 +1,9 @@
 import PhotographerTemplate from "../templates/photographerTemplate.js";
 import MediaTemplate from "../templates/mediaTemplate.js";
 import displayLightbox from "../components/lightbox.js";
-import { addSubmitFormListener } from "../utils/contactForm.js"
+import { addSubmitFormListener } from "../components/contactForm.js";
+import { navigateOption } from "../components/sortlist.js";
+import handleOptionSelection from "../components/sortlist.js";
 
 // fetch data from json
 export async function fetchPhotographerJSON() {
@@ -31,7 +33,7 @@ async function displayHeader(dataHeader, photographerId) {
   const modalAlt = document.getElementById("contact-modal");
   modalAlt.setAttribute("aria-label", `Contact Me ${photographer.name}`);
   modalAlt.setAttribute("aria-labelledby", "modal-title-name");
-  
+
   const modalTitleName = document.getElementById("modal-title-name");
   modalTitleName.textContent = photographer.name;
 
@@ -77,58 +79,31 @@ async function displayMediaGallery(dataGallery, photographerId) {
         }
       });
     }
-    
+
 
     mediaContainer.appendChild(mediaElement);
   });
 
-  // sortlist
-  const sortBySelect = document.getElementById('sort-by');
-  sortBySelect.addEventListener("change", () => {
-    const sortBy = sortBySelect.value;
+  // dropdown sortlist
+  const dropdownOptions = document.querySelectorAll(".dropdown-option");
 
-    // Sort the media array based on the selected value
-    switch (sortBy) {
-      case 'date':
-        media.sort((a, b) => new Date(b.date) - new Date(a.date));
-        break;
+  dropdownOptions.forEach(option => {
+    option.addEventListener("click", () => {
+      handleOptionSelection(option, mediaContainer, media, photographerId);
+    });
 
-      case 'title':
-        media.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-
-      case 'popularity':
-      default:
-        media.sort((a, b) => b.likes - a.likes);
-        break;
-    }
-
-    displayUpdatedMediaGallery(mediaContainer, media, photographerId);
+    option.addEventListener("keydown", event => {
+      if (event.key === "Enter") {
+        handleOptionSelection(option, mediaContainer, media, photographerId);
+      } else if (event.key === "ArrowDown") {
+        navigateOption(1);
+      } else if (event.key === "ArrowUp") {
+        navigateOption(-1);
+      }
+    });
   });
+
 }
-
-// display the updated photographer's gallery after sorting
-function displayUpdatedMediaGallery(container, media, photographerId) {
-  container.innerHTML = '';
-
-  media.forEach((item) => {
-    const mediaTemplate = new MediaTemplate(item);
-    const mediaElement = mediaTemplate.createMediaContent();
-    const img = mediaElement.getElementsByTagName("img");
-    const video = mediaElement.getElementsByTagName("video");
-
-    // display the lightbox
-    if (img.length > 0) {
-      img[0].addEventListener("click", () => displayLightbox(item, photographerId));
-    } else if (video.length > 0) {
-      video[0].addEventListener("click", () => displayLightbox(item, photographerId));
-    }
-
-    container.appendChild(mediaElement);
-  });
-}
-
-
 
 // display the sticky box showing photographer's price + sum up of likes
 async function displayBox(dataBox, photographerId) {

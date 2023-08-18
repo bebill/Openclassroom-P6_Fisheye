@@ -24,16 +24,18 @@
     <div class="sort-menu">
       <label id="listboxlabel" for="sort-by">Trier par</label>
       <div id="dropdown-container">
-        <select id="sort-by">
-          <option class="dropdown-option" value="popularity">Popularité</option>
-          <option value="date">Date</option>
-          <option value="title">Titre</option>
-        </select>
-        <div class="icon-container">
+        <div class="custom-dropdown" tabindex="0">
+          <span id="selected-option">Popularité</span>
           <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="dropdown-options" id="dropdown-options">
+          <div class="dropdown-option active" data-value="popularity" tabindex="0">Popularité</div>    
+          <div class="dropdown-option" data-value="date" tabindex="0">Date</div>
+          <div class="dropdown-option" data-value="title" tabindex="0">Titre</div>
         </div>
       </div>
     </div>
+    
 
     <div class="photograph-gallery"></div>
 
@@ -48,37 +50,31 @@
           <h2 class="modal-header modal-title" id="modal-title">Contactez-moi</h2>
           <h2 class="modal-header modal-title" id="modal-title-name"></h2>
         </div>
-        <a href="#" tabindex="0">
           <img class="close" id="close-btn" src="./assets/icons/close.svg" alt="Close Contact form">
-        </a>
       </header>
   
       <form id="contact-request">
       
         <div class="form-data">
           <label class="firt-name" for="first">Prénom</label>
-          <br>
           <input class="text-control" type="text" id="first" aria-label="First Name" required>
           <div class="error-message"></div> 
         </div>
     
         <div class="form-data">
           <label class="last-name" for="last">Nom</label>
-          <br>
           <input class="text-control" type="text" id="last" aria-label="Last Name" required>
           <div class="error-message"></div>
         </div>
 
         <div class="form-data">
           <label for="email">Email</label>
-          <br>
           <input class="text-control" type="email" id="email" aria-label="Email" required>
           <div class="error-message"></div> 
         </div>
     
         <div class="form-data">
           <label for="message">Votre message</label>
-          <br>
           <textarea class="text-control" id="message" aria-label="Your message" required></textarea>
           <div class="error-message"></div> 
         </div>
@@ -99,6 +95,7 @@
   </section>
 
   <!-- Scripts -->
+
   <script type="module" src="./scripts/pages/photographer.js"></script>
 
 </body>
