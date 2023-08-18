@@ -52,6 +52,15 @@ h1 {
     border-style: solid;
 }
 
+.photographer-section a:hover {
+    display: block;
+    height: 100%;
+    width: 100%;
+    border-color: #D3573C;
+    border-width: 3px;
+    border-style: solid;
+}
+
 .photographer-section figure {
     text-align: center;
     width: 100%;
