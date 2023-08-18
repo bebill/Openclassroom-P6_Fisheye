@@ -2,8 +2,8 @@ import PhotographerTemplate from "../templates/photographerTemplate.js";
 import MediaTemplate from "../templates/mediaTemplate.js";
 import displayLightbox from "../components/lightbox.js";
 import { addSubmitFormListener } from "../components/contactForm.js";
-import { navigateOption } from "../components/sortlist.js";
-import handleOptionSelection from "../components/sortlist.js";
+import { navigateOption } from "../components/sortList.js";
+import handleOptionSelection from "../components/sortList.js";
 
 // fetch data from json
 export async function fetchPhotographerJSON() {
