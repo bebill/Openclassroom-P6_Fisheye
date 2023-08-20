@@ -4,6 +4,7 @@ import displayLightbox from "../components/lightbox.js";
 import { addSubmitFormListener } from "../components/contactForm.js";
 import { navigateOption } from "../components/sortList.js";
 import handleOptionSelection from "../components/sortList.js";
+import { displayUpdatedBox } from "../components/updatedLikeCounter.js";
 
 // fetch data from json
 export async function fetchPhotographerJSON() {
@@ -105,6 +106,10 @@ async function displayMediaGallery(dataGallery, photographerId) {
 
 }
 
+
+
+  
+
 // display the sticky box showing photographer's price + sum up of likes
 async function displayBox(dataBox, photographerId) {
   const photographer = dataBox.photographers.find(
@@ -131,6 +136,16 @@ async function displayBox(dataBox, photographerId) {
   const boxContainer = document.getElementsByClassName("photograph-sumbox")[0];
   boxContainer.appendChild(likesRecap);
   boxContainer.appendChild(priceRecap);
+
+  const dropdownOptions = document.querySelectorAll(".dropdown-option");
+
+  dropdownOptions.forEach(option => {
+    option.addEventListener("click", () => {
+      displayUpdatedBox(photographerMedia);
+    });
+  });
+
+
 }
 
 

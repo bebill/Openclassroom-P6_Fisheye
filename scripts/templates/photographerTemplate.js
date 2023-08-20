@@ -114,6 +114,7 @@ export default class PhotographerTemplate {
     const heartMediaList = document.getElementsByClassName("heart-media");
 
     const totalLikesDisplay = document.createElement("span");
+    totalLikesDisplay.setAttribute("id", "total-likes");
     totalLikesDisplay.textContent = totalLikes + " ";
 
     const heartBox = document.createElement("i");
