@@ -394,7 +394,7 @@ form input {
   background-color: #901c1c;
   font-size: inherit;
   font-family: 'DM Sans', sans-serif;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
   cursor: pointer;
 }
 
@@ -408,7 +408,15 @@ form input {
   color: #312E2E;
 }
 
+.custom-dropdown.active i {
+  transition: transform 0.25s ease-in;
+  transform: rotate(180deg);
+}
 
+.custom-dropdown i {
+  transition: transform 0.25s ease-in;
+  transform: rotate(0deg);
+}
 
 
 .dropdown-options {
@@ -419,16 +427,43 @@ form input {
   z-index: 1;
   top: 100%;
   left: 0;
-  width: 155px;
-  padding-left: 15px;
+  width: 170px;
 }
 
 .dropdown-options.show {
   display: block;
+  border-radius: 0 0 5px 5px;
+}
+
+.dropdown-option {
+  padding: 20px 0;
+  margin: 0 15px;
+}
+
+.dropdown-option:focus {
+  background-color: #DB8876;
+  color: #312E2E;
+  padding: 20px 15px;
+  margin: 0;
+}
+
+.dropdown-option:hover {
+  background-color: #DB8876;
+  color: #312E2E;
+  padding: 20px 15px;
+  margin: 0;
+}
+
+.dropdown-option:last-child:hover {
+  border-radius: 0 0 5px 5px;
+}
+
+.dropdown-option:last-child:focus {
+  border-radius: 0 0 5px 5px;
 }
 
 .whiteline {
-  border-top: 2px;
-  width: 90%;
-  color: #312E2E;
+  height: 2px;
+  background-color: #FFFFFF;
+  margin: 0 15px;
 }

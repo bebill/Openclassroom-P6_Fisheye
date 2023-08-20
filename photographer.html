@@ -24,18 +24,20 @@
     <div class="sort-menu">
       <label id="listboxlabel" for="sort-by">Trier par</label>
       <div id="dropdown-container">
-        <div class="custom-dropdown" tabindex="0">
-          <span id="selected-option">Popularité</span>
+        <div class="custom-dropdown" role="button" tabindex="0">
+          <span class="select_button" id="selected-option">Popularité</span>
           <i class="fa-solid fa-chevron-down"></i>
         </div>
         <div class="dropdown-options" id="dropdown-options">
-          <div class="dropdown-option active" data-value="popularity" tabindex="0">Popularité</div>
+          <div class="whiteline" id="whiteline1"></div>
+          <div class="dropdown-option" data-value="popularity" tabindex="0">Popularité</div>
+          <div class="whiteline" id="whiteline2"></div>
           <div class="dropdown-option" data-value="date" tabindex="0">Date</div>
+          <div class="whiteline" id="whiteline3"></div>
           <div class="dropdown-option" data-value="title" tabindex="0">Titre</div>
         </div>
       </div>
     </div>
-
 
     <div class="photograph-gallery"></div>
 
